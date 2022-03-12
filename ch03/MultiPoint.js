@@ -44,7 +44,7 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Draw three points
-  gl.drawArrays(gl.POINTS, 0, n);
+  gl.drawArrays(gl.POINTS, 0, 3);
 }
 
 function initVertexBuffers(gl) {
@@ -70,7 +70,7 @@ function initVertexBuffers(gl) {
     console.log('Failed to get the storage location of a_Position');
     return -1;
   }
-  // Assign the buffer object to a_Position variable
+  // Assign the buffer object to a_Position attribute variable, and tell it how to interpret the data
   gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
 
   // Enable the assignment to a_Position variable

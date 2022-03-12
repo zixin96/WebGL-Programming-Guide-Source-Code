@@ -59,7 +59,7 @@ function main() {
   var tick = function() {
     currentAngle = animate(currentAngle);  // Update the rotation angle
     draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix);   // Draw the triangle
-    requestAnimationFrame(tick, canvas); // Request that the browser ?calls tick
+    requestAnimationFrame(tick); // Request that the browser ?calls tick
   };
   tick();
 }
@@ -120,5 +120,5 @@ function animate(angle) {
   g_last = now;
   // Update the current rotation angle (adjusted by the elapsed time)
   var newAngle = angle + (ANGLE_STEP * elapsed) / 1000.0;
-  return newAngle %= 360;
+  return newAngle % 360;
 }

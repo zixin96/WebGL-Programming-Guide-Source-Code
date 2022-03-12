@@ -51,9 +51,9 @@ function main() {
 function initVertexBuffers(gl) {
   var verticesSizes = new Float32Array([
     // Coordinate and size of points
-     0.0,  0.5,  10.0,  // the 1st point
-    -0.5, -0.5,  20.0,  // the 2nd point
-     0.5, -0.5,  30.0   // the 3rd point
+     0.0,  0.5,  10.0,  // the 1st vertex
+    -0.5, -0.5,  20.0,  // the 2nd vertex
+     0.5, -0.5,  30.0   // the 3rd vertex
   ]);
   var n = 3; // The number of vertices
 

@@ -7,6 +7,7 @@ var VSHADER_SOURCE =
   'void main() {\n' +
   '  gl_Position = a_Position;\n' +
   '  v_Color = a_Color;\n' +
+    '  gl_PointSize = 10.0;\n' +
   '}\n';
 
 // Fragment shader program
@@ -50,7 +51,7 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Draw the rectangle
-  gl.drawArrays(gl.TRIANGLES, 0, n);
+  gl.drawArrays(gl.POINTS, 0, n);
 }
 
 function initVertexBuffers(gl) {

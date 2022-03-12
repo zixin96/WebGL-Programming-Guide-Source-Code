@@ -11,7 +11,7 @@ function main() {
   }
 
   // Set clear color
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.clearColor(0.5, 0.5, 0.5, 1.0);
 
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);

@@ -41,7 +41,7 @@ function main() {
   canvas.onmousedown = (ev) => { click(ev, gl, canvas, a_Position); };
 
   // Specify the color for clearing <canvas>
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.clearColor(0.5, 0.5, 0.5, 1.0);
 
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
@@ -58,17 +58,20 @@ function click(ev, gl, canvas, a_Position) {
   x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
   y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
   // Store the coordinates to g_points array
-  g_points.push(x); g_points.push(y);
+  g_points.push([x,y]);
 
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);  // WebGL will reinitialize the color buffer to (0, 0, 0, 0) (transparent) after drawing the point, thus gl.clear is necessary to preserve the background color.
 
   var len = g_points.length;
-  for(var i = 0; i < len; i += 2) {
+  for(var i = 0; i < len; i++) {
+    var point = g_points[i];
     // Pass the position of a point to a_Position variable
-    gl.vertexAttrib3f(a_Position, g_points[i], g_points[i+1], 0.0);
+    gl.vertexAttrib3f(a_Position, point[0], point[1], 0.0);
 
     // Draw
     gl.drawArrays(gl.POINTS, 0, 1);
   }
+  // after the drawing operation is performed to the color buffer, the system displays its content to the screen.
+  // after that, the color buffer is reinitialized to default values specified in table 2.1 (page 23) and its content is lost. (default behavior)
 }

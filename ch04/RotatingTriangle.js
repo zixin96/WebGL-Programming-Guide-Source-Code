@@ -43,7 +43,7 @@ function main() {
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
-  // Get storage location of u_ModelMatrix
+  // Get storage location of u_ModelMatrix (this location never changes, it's more efficient to do retrieve it once)
   var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix');
   if (!u_ModelMatrix) { 
     console.log('Failed to get the storage location of u_ModelMatrix');
@@ -52,14 +52,15 @@ function main() {
 
   // Current rotation angle
   var currentAngle = 0.0;
-  // Model matrix
+  // Model matrix (we could create model matrix inside draw(), but that means we need to create a new Matrix4 each time
+  // draw() is called, this is inefficient)
   var modelMatrix = new Matrix4();
 
   // Start drawing
   var tick = function() {
     currentAngle = animate(currentAngle);  // Update the rotation angle
     draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix);   // Draw the triangle
-    requestAnimationFrame(tick, canvas); // Request that the browser calls tick
+    requestAnimationFrame(tick); // Request that the browser calls tick
   };
   tick();
 }
@@ -119,5 +120,5 @@ function animate(angle) {
   g_last = now;
   // Update the current rotation angle (adjusted by the elapsed time)
   var newAngle = angle + (ANGLE_STEP * elapsed) / 1000.0;
-  return newAngle %= 360;
+  return newAngle % 360;
 }
