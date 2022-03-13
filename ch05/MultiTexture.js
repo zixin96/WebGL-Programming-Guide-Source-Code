@@ -153,7 +153,7 @@ function loadTexture(gl, n, texture, u_Sampler, image, texUnit) {
   // Set the image to texture
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
   
-  gl.uniform1i(u_Sampler, texUnit);   // Pass the texure unit to u_Sampler
+  gl.uniform1i(u_Sampler, texUnit);   // Pass the texture unit to u_Sampler
   
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
