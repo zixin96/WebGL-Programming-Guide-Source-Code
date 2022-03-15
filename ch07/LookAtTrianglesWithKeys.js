@@ -47,7 +47,7 @@ function main() {
   // Specify the color for clearing <canvas>
   gl.clearColor(0, 0, 0, 1);
 
-  // Get the storage location of u_ViewMatrix
+  // Get the storage location of u_ViewMatrix (you really want this to execute only once)
   var u_ViewMatrix = gl.getUniformLocation(gl.program, 'u_ViewMatrix');
   if(!u_ViewMatrix) { 
     console.log('Failed to get the storage locations of u_ViewMatrix');

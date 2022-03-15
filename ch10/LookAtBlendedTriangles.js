@@ -1,6 +1,3 @@
-// LookAtBlendedTriangles.js (c) 2012 matsuda and ohnishi
-// LookAtTrianglesWithKey_ViewVolume.js is the original
-// Vertex shader program
 var VSHADER_SOURCE =
   "attribute vec4 a_Position;\n" +
   "attribute vec4 a_Color;\n" +
@@ -12,7 +9,6 @@ var VSHADER_SOURCE =
   "  v_Color = a_Color;\n" +
   "}\n";
 
-// Fragment shader program
 var FSHADER_SOURCE =
   "#ifdef GL_ES\n" +
   "precision mediump float;\n" +
@@ -82,71 +78,17 @@ function main() {
 function initVertexBuffers(gl) {
   var verticesColors = new Float32Array([
     // Vertex coordinates and color(RGBA)
-    0.0,
-    0.5,
-    -0.4,
-    0.4,
-    1.0,
-    0.4,
-    0.4, // The back green one
-    -0.5,
-    -0.5,
-    -0.4,
-    0.4,
-    1.0,
-    0.4,
-    0.4,
-    0.5,
-    -0.5,
-    -0.4,
-    1.0,
-    0.4,
-    0.4,
-    0.4,
+    0.0,  0.5,  -0.4,  0.4,  1.0,  0.4,  0.4, // The back green one
+    -0.5, -0.5,  -0.4,  0.4,  1.0,  0.4,  0.4,
+    0.5, -0.5,  -0.4,  1.0,  0.4,  0.4,  0.4,
 
-    0.5,
-    0.4,
-    -0.2,
-    1.0,
-    0.4,
-    0.4,
-    0.4, // The middle yerrow one
-    -0.5,
-    0.4,
-    -0.2,
-    1.0,
-    1.0,
-    0.4,
-    0.4,
-    0.0,
-    -0.6,
-    -0.2,
-    1.0,
-    1.0,
-    0.4,
-    0.4,
+    0.5,  0.4,  -0.2,  1.0,  0.4,  0.4,  0.4, // The middle yerrow one
+    -0.5,  0.4,  -0.2,  1.0,  1.0,  0.4,  0.4,
+    0.0, -0.6,  -0.2,  1.0,  1.0,  0.4,  0.4,
 
-    0.0,
-    0.5,
-    0.0,
-    0.4,
-    0.4,
-    1.0,
-    0.4, // The front blue one
-    -0.5,
-    -0.5,
-    0.0,
-    0.4,
-    0.4,
-    1.0,
-    0.4,
-    0.5,
-    -0.5,
-    0.0,
-    1.0,
-    0.4,
-    0.4,
-    0.4,
+    0.0,  0.5,   0.0,  0.4,  0.4,  1.0,  0.4,  // The front blue one
+    -0.5, -0.5,   0.0,  0.4,  0.4,  1.0,  0.4,
+    0.5, -0.5,   0.0,  1.0,  0.4,  0.4,  0.4,
   ]);
   var n = 9;
 

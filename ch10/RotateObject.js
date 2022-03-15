@@ -56,7 +56,8 @@ function main() {
     return;
   }
 
-  // Calculate the view projection matrix
+  // Calculate the view projection matrix in advance
+  // No model matrix here because you need to change it on-the-fly according to the amount of mouse movement
   var viewProjMatrix = new Matrix4();
   viewProjMatrix.setPerspective(30.0, canvas.width / canvas.height, 1.0, 100.0);
   viewProjMatrix.lookAt(3.0, 3.0, 7.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
@@ -73,7 +74,7 @@ function main() {
 
   var tick = function() {   // Start drawing
     draw(gl, n, viewProjMatrix, u_MvpMatrix, currentAngle);
-    requestAnimationFrame(tick, canvas);
+    requestAnimationFrame(tick);
   };
   tick();
 }
@@ -141,20 +142,28 @@ function initEventHandlers(canvas, currentAngle) {
 
   canvas.onmousedown = function(ev) {   // Mouse is pressed
     var x = ev.clientX, y = ev.clientY;
-    // Start dragging if a moue is in <canvas>
+    // Start dragging if the mouse is in <canvas>
     var rect = ev.target.getBoundingClientRect();
+    // checks whether the mouse has been pressed inside the <canvas> element
     if (rect.left <= x && x < rect.right && rect.top <= y && y < rect.bottom) {
-      lastX = x; lastY = y; // this line shouldn't be necessary since onmousemove will update lastX and lastY
+      // If it is inside the <canvas>, saves that position in lastX and lastY.
+      lastX = x; lastY = y;
+      // dragging has begun
       dragging = true;
     }
   };
 
-  canvas.onmouseup = function(ev) { dragging = false;  }; // Mouse is released
+  canvas.onmouseup = function(ev) { // Mouse is released
+    // dragging is done
+    dragging = false;
+  };
 
-  canvas.onmousemove = function(ev) { // Mouse is moved
+  canvas.onmousemove = function(ev) { // Mouse is moved, tracks the movement of the mouse
     var x = ev.clientX, y = ev.clientY;
     if (dragging) {
+      // dx/dy are scaled, using factor, which is a function of the canvas size
       var factor = 100/canvas.height; // The rotation ratio
+      // how long the mouse has moved
       var dx = factor * (x - lastX);
       var dy = factor * (y - lastY);
       // Limit x-axis rotation angle to -90 to 90 degrees
@@ -162,6 +171,7 @@ function initEventHandlers(canvas, currentAngle) {
       currentAngle[0] = currentAngle[0] + dy;
       currentAngle[1] = currentAngle[1] + dx;
     }
+    // Because the mouse has moved, its position is saved in lastX and lastY
     lastX = x, lastY = y;
   };
 }

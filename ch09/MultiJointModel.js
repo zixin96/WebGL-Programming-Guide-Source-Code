@@ -197,7 +197,7 @@ function draw(gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
   g_modelMatrix.setTranslate(0.0, -12.0, 0.0);
   drawBox(gl, n, 10.0, baseHeight, 10.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);
  
-  // Arm1
+  // Arm1 (arm1 affects the rest of the arms, so it's first)
   var arm1Length = 10.0;
   g_modelMatrix.translate(0.0, baseHeight, 0.0);     // Move onto the base
   g_modelMatrix.rotate(g_arm1Angle, 0.0, 1.0, 0.0);  // Rotate around the y-axis
@@ -219,11 +219,11 @@ function draw(gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
   g_modelMatrix.translate(0.0, palmLength, 0.0);
 
   // Draw finger1
-  pushMatrix(g_modelMatrix);
+  pushMatrix(g_modelMatrix); // save the model matrix
     g_modelMatrix.translate(0.0, 0.0, 2.0);
     g_modelMatrix.rotate(g_joint3Angle, 1.0, 0.0, 0.0);  // Rotate around the x-axis
     drawBox(gl, n, 1.0, 2.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);
-  g_modelMatrix = popMatrix();
+  g_modelMatrix = popMatrix(); // restore the model matrix
 
   // Draw finger2
   g_modelMatrix.translate(0.0, 0.0, -2.0);

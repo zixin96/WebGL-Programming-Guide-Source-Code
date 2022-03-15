@@ -144,6 +144,9 @@ function initVertexBuffers(gl) {
   return indices.length;
 }
 
+// draw the cube with a single color “red”
+// Read the pixel value (color) of the selected point.
+// Redraw the cube with its original color
 function check(gl, n, x, y, currentAngle, u_Clicked, viewProjMatrix, u_MvpMatrix) {
   var picked = false;
   gl.uniform1i(u_Clicked, 1);  // Pass true to u_Clicked
